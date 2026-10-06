@@ -113,6 +113,10 @@ endif
     LOCAL_SRC_FILES += audio_extn/Gef.cpp
 endif
 
+
+# arm (2nd arch) builds must resolve <asm/...> to bionic's arm32 headers
+# before generated arm64 kernel headers (which use __uint128_t, unsupported on armv7a).
+LOCAL_C_INCLUDES_arm := bionic/libc/kernel/uapi/asm-arm 
 include $(BUILD_SHARED_LIBRARY)
 
 
